@@ -308,13 +308,25 @@ function PageContent({ page }: { page: Page }) {
 
 function Ebook() {
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const printA4 = () => {
+    document.body.classList.remove("mobile-pdf");
+    window.print();
+  };
+  const printMobile = () => {
+    document.body.classList.add("mobile-pdf");
+    window.print();
+    window.setTimeout(() => document.body.classList.remove("mobile-pdf"), 1000);
+  };
 
   return <main className="pb-8">
     <nav className="screen-nav sticky top-0 z-20 border-b border-border bg-background/95 px-5 py-3 backdrop-blur">
       <div className="mx-auto flex max-w-[794px] items-center justify-between gap-4">
         <button onClick={() => go("sumario")} className="text-xs font-bold uppercase tracking-[.16em] text-primary">Sumário</button>
         <span className="font-display text-lg text-primary">Morango Cravejado</span>
-        <button onClick={() => window.print()} className="text-xs font-bold uppercase tracking-[.16em] text-primary">Imprimir / PDF</button>
+        <div className="flex items-center gap-3">
+          <button onClick={printMobile} className="text-xs font-bold uppercase tracking-[.12em] text-primary whitespace-nowrap">PDF Mobile</button>
+          <button onClick={printA4} className="hidden text-xs font-bold uppercase tracking-[.16em] text-primary sm:block">PDF A4</button>
+        </div>
       </div>
     </nav>
 
