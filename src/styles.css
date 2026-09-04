@@ -52,5 +52,35 @@
 .book-navigation { width: min(100%, 794px); margin: 16px auto 48px; display: flex; justify-content: space-between; align-items: center; color: var(--primary); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
 .book-navigation button { background: transparent; border: 0; color: inherit; cursor: pointer; padding: 8px 0; }
 .book-navigation button:hover { color: var(--raspberry); }
-@media print { body { background: white; } .screen-nav, .book-navigation { display: none !important; } .book-page { width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; margin: 0 !important; break-after: page; page-break-after: always; } }
-@media (max-width: 640px) { .book-page { min-height: 100svh; padding: 52px 32px 58px; } .editorial-page::before { inset: 12px; } .page-number { right: 28px; bottom: 26px; } }
+
+/* PDF profissional: cada página visual do ebook ocupa exatamente uma folha A4. */
+@page { size: A4 portrait; margin: 0; }
+@media print {
+  html, body { width: 210mm; margin: 0; background: #fff !important; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .screen-nav, .book-navigation { display: none !important; }
+  .book-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    box-sizing: border-box;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 20mm 19.5mm 17mm !important;
+    overflow: hidden !important;
+    break-after: page;
+    page-break-after: always;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .book-page:last-child { break-after: auto; page-break-after: auto; }
+  .editorial-page::before { inset: 5.3mm; }
+  img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (max-width: 640px) {
+  .book-page { min-height: 100svh; padding: 52px 32px 58px; }
+  .editorial-page::before { inset: 12px; }
+  .page-number { right: 28px; bottom: 26px; }
+}
