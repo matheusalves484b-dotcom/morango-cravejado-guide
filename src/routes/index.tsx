@@ -6,7 +6,7 @@ import coverImage from "@/assets/morango-cravejado-cover.jpg";
 import detailImage from "@/assets/morango-cravejado-detail.jpg";
 import packagingImage from "@/assets/morango-cravejado-packaging.jpg";
 
-const CHECKOUT_URL = "#oferta";
+const CHECKOUT_URL = "https://pay.lowify.com.br/checkout?product_id=PErwVu";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
 });
 
 function CTA({ children = "QUERO APRENDER O MORANGO CRAVEJADO" }: { children?: React.ReactNode }) {
-  return <a className="cta" href={CHECKOUT_URL} onClick={(e) => { if (CHECKOUT_URL === "#oferta") { e.preventDefault(); document.querySelector("#oferta")?.scrollIntoView({ behavior: "smooth" }); } }}><span>{children}</span><ArrowRight className="cta-arrow" size={19}/></a>;
+  return <a className="cta" href={CHECKOUT_URL}><span>{children}</span><ArrowRight className="cta-arrow" size={19}/></a>;
 }
 
 function SalesPage() {
