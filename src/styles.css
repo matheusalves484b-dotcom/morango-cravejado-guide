@@ -114,6 +114,54 @@
   .impact-statement { font-size: 19px; }
   .impact-points { margin-top: 14px; gap: 5px; }
   img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* PDF Mobile: formato estreito, fonte maior e conteúdo fluido para leitura confortável no celular. */
+  body.mobile-pdf { page: mobile; width: 105mm; background: #fff !important; }
+  @page mobile { size: 105mm 186mm; margin: 0; }
+  body.mobile-pdf .book-page { width: 105mm !important; height: auto !important; min-height: 186mm !important; max-height: none !important; box-sizing: border-box; padding: 12mm 9mm 14mm !important; overflow: visible !important; break-after: page; page-break-after: always; break-inside: auto; page-break-inside: auto; }
+  body.mobile-pdf .editorial-page::before { inset: 4mm; }
+  body.mobile-pdf .internal-header { text-align: center; }
+  body.mobile-pdf .internal-meta { flex-direction: column; gap: 2mm; }
+  body.mobile-pdf .chapter-number { font-size: 22px; }
+  body.mobile-pdf .internal-header .gold-rule { width: 14mm; margin: 4mm auto 0; }
+  body.mobile-pdf .internal-header .book-title { margin-top: 4mm; font-size: 25px; line-height: 1.08; }
+  body.mobile-pdf .internal-lead { max-width: 82mm; margin: 4mm auto 0; font-size: 10.5px; line-height: 1.55; }
+  body.mobile-pdf .internal-body { margin-top: 6mm; justify-content: flex-start; overflow: visible; }
+  body.mobile-pdf .list-layout, body.mobile-pdf .recipe-layout, body.mobile-pdf .image-layout { grid-template-columns: 1fr; gap: 3mm; }
+  body.mobile-pdf .info-card { min-height: 0; grid-template-columns: 9mm 1fr; gap: 3mm; padding: 3.2mm 3.2mm; border-radius: 2mm; }
+  body.mobile-pdf .info-number { font-size: 16px; }
+  body.mobile-pdf .info-label { font-size: 9px; line-height: 1.35; letter-spacing: .06em; }
+  body.mobile-pdf .info-text { font-size: 11px; line-height: 1.45; }
+  body.mobile-pdf .info-description { margin-top: 1.2mm; font-size: 10px; line-height: 1.45; }
+  body.mobile-pdf .tip-card { margin-top: 2mm; padding: 3mm 3.2mm; grid-template-columns: 6mm 1fr; gap: 2.5mm; }
+  body.mobile-pdf .tip-card strong { font-size: 8px; }
+  body.mobile-pdf .tip-card p { margin-top: 1mm; font-size: 10px; line-height: 1.45; }
+  body.mobile-pdf .recipe-layout { gap: 4mm; }
+  body.mobile-pdf .recipe-steps { gap: 2.5mm; }
+  body.mobile-pdf .recipe-step { grid-template-columns: 8mm 1fr; gap: 3mm; padding-bottom: 2.5mm; }
+  body.mobile-pdf .recipe-number { font-size: 15px; }
+  body.mobile-pdf .recipe-label, body.mobile-pdf .table-label { font-size: 8.5px; line-height: 1.3; }
+  body.mobile-pdf .recipe-text, body.mobile-pdf .table-text, body.mobile-pdf .editorial-bullet p, body.mobile-pdf .impact-point { font-size: 10px; line-height: 1.45; }
+  body.mobile-pdf .editorial-table { width: 100%; }
+  body.mobile-pdf .table-row { grid-template-columns: 8mm 1fr; gap: 3mm; padding: 3mm 3.2mm; }
+  body.mobile-pdf .table-index { font-size: 15px; }
+  body.mobile-pdf .image-layout { gap: 4mm; }
+  body.mobile-pdf .image-frame { width: 100%; height: 58mm; border-width: 4px; }
+  body.mobile-pdf .image-copy { gap: 2.5mm; }
+  body.mobile-pdf .editorial-bullet { grid-template-columns: 8mm 1fr; gap: 3mm; padding-bottom: 2.5mm; }
+  body.mobile-pdf .editorial-bullet span { font-size: 14px; }
+  body.mobile-pdf .internal-impact { padding: 6mm 5mm; }
+  body.mobile-pdf .impact-icon { width: 10mm; height: 10mm; margin-bottom: 4mm; }
+  body.mobile-pdf .impact-statement { font-size: 18px; line-height: 1.18; }
+  body.mobile-pdf .impact-points { margin-top: 4mm; gap: 2.5mm; }
+  body.mobile-pdf .impact-point { gap: 2.5mm; font-size: 10px; line-height: 1.45; }
+  body.mobile-pdf .internal-footer { position: absolute; left: 9mm; right: 9mm; bottom: 5mm; font-size: 6px; }
+  body.mobile-pdf .internal-footer span:last-child { font-size: 11px; }
+  body.mobile-pdf .cover-page { min-height: 186mm !important; height: 186mm !important; padding: 9mm 9mm 8mm !important; }
+  body.mobile-pdf .cover-page > div:first-child { padding-bottom: 0; }
+  body.mobile-pdf .cover-page > div:first-child > p:last-child { max-width: 80mm; margin-top: 5mm; font-size: 10px; line-height: 1.5; }
+  body.mobile-pdf .cover-page > img { height: 46% !important; min-height: 0 !important; object-position: center center; }
+  body.mobile-pdf .cover-page > div:last-child { margin-top: auto; padding: 3mm !important; }
 }
 
 @media (max-width: 700px) {
