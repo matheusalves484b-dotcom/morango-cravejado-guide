@@ -8,3 +8,21 @@
 .testimonial-card:nth-child(3) .testimonial-meta b::after,.testimonial-card:nth-child(7) .testimonial-meta b::after{content:'Camila A.'}
 .testimonial-card:nth-child(4) .testimonial-meta b::after,.testimonial-card:nth-child(8) .testimonial-meta b::after{content:'Fernanda M.'}
 @media(max-width:850px){.testimonial-card:nth-child(n) .testimonial-meta b::after{font-size:11px}}
+/* Refinamento visual: menos emojis, mais linguagem editorial e premium. */
+.floating-badge span{display:none}
+.floating-badge{display:block;padding:10px 15px;transform:rotate(2deg);text-align:center}
+.floating-badge b,.floating-badge small{display:block}
+.ticker-track span{font-size:0}
+.ticker-track span:nth-child(1)::after,.ticker-track span:nth-child(3)::after{content:'MORANGO CRAVEJADO'}
+.ticker-track span:nth-child(2)::after{content:'CHEGUE ANTES DA MULTIDÃO'}
+.ticker-track span:nth-child(4)::after{content:'NOVA OPORTUNIDADE'}
+.ticker-track span::after{font-size:11px}
+.benefit-icon{font-size:0;width:42px;height:42px;border:1px solid #d8b9b0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#9c3151;font:700 12px Georgia,serif}
+.benefit:nth-child(1) .benefit-icon::after{content:'01'}
+.benefit:nth-child(2) .benefit-icon::after{content:'02'}
+.benefit:nth-child(3) .benefit-icon::after{content:'03'}
+.benefit:nth-child(4) .benefit-icon::after{content:'04'}
+.benefit:nth-child(5) .benefit-icon::after{content:'05'}
+.benefit:nth-child(6) .benefit-icon::after{content:'06'}
+.guide-preview{display:none!important}
+.guide-preview-card,.guide-preview-page{display:none!important}
