@@ -53,7 +53,6 @@
 .book-navigation button { background: transparent; border: 0; color: inherit; cursor: pointer; padding: 8px 0; display: inline-flex; align-items: center; gap: 6px; }
 .book-navigation button:hover { color: var(--raspberry); }
 
-/* Sistema editorial das páginas internas */
 .internal-page { display: flex; flex-direction: column; }
 .internal-header { position: relative; z-index: 2; flex: 0 0 auto; }
 .internal-meta { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
@@ -100,17 +99,17 @@
 .editorial-bullet p { color: var(--foreground); font-size: 9.5px; line-height: 1.55; }
 
 .internal-impact .internal-body { justify-content: center; }
-.internal-impact { width: 100%; max-width: 650px; margin-inline: auto; padding: 34px 38px; background: var(--chocolate); color: var(--primary-foreground); border-top: 3px solid var(--gold); border-bottom: 1px solid var(--gold); box-shadow: 0 18px 40px color-mix(in oklab, var(--chocolate) 16%, transparent); }
-.impact-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 18px; border: 1px solid color-mix(in oklab, var(--gold) 70%, transparent); color: var(--gold); border-radius: 50%; }
-.impact-statement { color: var(--primary-foreground); font-family: var(--font-display); font-size: 24px; line-height: 1.18; }
+/* Os três cards de impacto ficam claros para manter leitura e unidade visual com o restante do ebook. */
+.internal-impact { width: 100%; max-width: 650px; margin-inline: auto; padding: 34px 38px; background: linear-gradient(135deg, var(--secondary), var(--card)); color: var(--foreground); border-top: 3px solid var(--gold); border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); border-right: 1px solid var(--border); box-shadow: 0 18px 40px color-mix(in oklab, var(--chocolate) 10%, transparent); }
+.impact-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 18px; border: 1px solid var(--gold); color: var(--primary); border-radius: 50%; }
+.impact-statement { color: var(--primary); font-family: var(--font-display); font-size: 24px; line-height: 1.18; }
 .impact-points { display: grid; gap: 8px; margin-top: 22px; }
-.impact-point { display: flex; gap: 9px; color: color-mix(in oklab, var(--primary-foreground) 88%, transparent); font-size: 9.5px; line-height: 1.55; }
+.impact-point { display: flex; gap: 9px; color: var(--foreground); font-size: 9.5px; line-height: 1.55; }
 .impact-point svg { flex: 0 0 auto; color: var(--gold); margin-top: 2px; }
 .internal-impact + .tip-card { max-width: 650px; margin-inline: auto; }
 
 .toc-item { transition: transform .2s ease, padding .2s ease; }
 .toc-item:hover { transform: translateX(4px); }
-
 .cover-page { min-height: 1123px; }
 
 @media print {
@@ -118,11 +117,7 @@
   html, body { width: 210mm; margin: 0; background: #fff !important; }
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .screen-nav, .book-navigation { display: none !important; }
-  .book-page {
-    width: 210mm !important; height: 297mm !important; min-height: 297mm !important; max-height: 297mm !important;
-    box-sizing: border-box; box-shadow: none !important; margin: 0 !important; padding: 20mm 19.5mm 17mm !important;
-    overflow: hidden !important; break-after: page; page-break-after: always; break-inside: avoid; page-break-inside: avoid;
-  }
+  .book-page { width: 210mm !important; height: 297mm !important; min-height: 297mm !important; max-height: 297mm !important; box-sizing: border-box; box-shadow: none !important; margin: 0 !important; padding: 20mm 19.5mm 17mm !important; overflow: hidden !important; break-after: page; page-break-after: always; break-inside: avoid; page-break-inside: avoid; }
   .book-page:last-child { break-after: auto; page-break-after: auto; }
   .editorial-page::before { inset: 5.3mm; }
   .internal-footer { left: 19.5mm; right: 19.5mm; bottom: 9mm; }
