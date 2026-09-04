@@ -20,7 +20,12 @@ export const Route = createFileRoute("/")({
 });
 
 function CTA({ children = "QUERO APRENDER O MORANGO CRAVEJADO" }: { children?: React.ReactNode }) {
-  return <a className="cta" href={CHECKOUT_URL}><span>{children}</span><ArrowRight className="cta-arrow" size={19}/></a>;
+  const goToCheckout = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    window.location.assign(CHECKOUT_URL);
+  };
+
+  return <a className="cta" href={CHECKOUT_URL} target="_self" rel="noopener" onClick={goToCheckout}><span>{children}</span><ArrowRight className="cta-arrow" size={19}/></a>;
 }
 
 function SalesPage() {
