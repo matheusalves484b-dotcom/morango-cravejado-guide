@@ -54,10 +54,11 @@
 .book-navigation button:hover { color: var(--raspberry); }
 
 .internal-page { display: flex; flex-direction: column; }
-.internal-header { position: relative; z-index: 2; flex: 0 0 auto; }
-.internal-meta { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.internal-header { position: relative; z-index: 2; flex: 0 0 auto; text-align: center; }
+.internal-meta { display: flex; align-items: center; justify-content: center; gap: 18px; }
 .chapter-number { color: var(--gold); font-family: var(--font-display); font-size: 28px; line-height: 1; }
-.internal-lead { max-width: 640px; margin-top: 18px; color: var(--muted-foreground); font-size: 13px; line-height: 1.8; }
+.internal-header .gold-rule { margin-inline: auto; }
+.internal-lead { max-width: 640px; margin: 18px auto 0; color: var(--muted-foreground); font-size: 13px; line-height: 1.8; }
 .internal-body { position: relative; z-index: 2; flex: 1; min-height: 0; margin-top: 25px; display: flex; flex-direction: column; justify-content: center; }
 .internal-footer { position: absolute; left: 74px; right: 74px; bottom: 29px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 9px; color: var(--muted-foreground); font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
 .internal-footer span:last-child { color: var(--gold); font-family: var(--font-display); font-size: 14px; letter-spacing: 0; }
@@ -101,8 +102,8 @@
 .internal-impact .internal-body { justify-content: center; }
 /* Os três cards de impacto ficam claros para manter leitura e unidade visual com o restante do ebook. */
 .internal-impact { width: 100%; max-width: 650px; margin-inline: auto; padding: 34px 38px; background: linear-gradient(135deg, var(--secondary), var(--card)); color: var(--foreground); border-top: 3px solid var(--gold); border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); border-right: 1px solid var(--border); box-shadow: 0 18px 40px color-mix(in oklab, var(--chocolate) 10%, transparent); }
-.impact-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 18px; border: 1px solid var(--gold); color: var(--primary); border-radius: 50%; }
-.impact-statement { color: var(--primary); font-family: var(--font-display); font-size: 24px; line-height: 1.18; }
+.impact-icon { width: 42px; height: 42px; display: grid; place-items: center; margin: 0 auto 18px; border: 1px solid var(--gold); color: var(--primary); border-radius: 50%; }
+.impact-statement { color: var(--primary); font-family: var(--font-display); font-size: 24px; line-height: 1.18; text-align: center; }
 .impact-points { display: grid; gap: 8px; margin-top: 22px; }
 .impact-point { display: flex; gap: 9px; color: var(--foreground); font-size: 9.5px; line-height: 1.55; }
 .impact-point svg { flex: 0 0 auto; color: var(--gold); margin-top: 2px; }
