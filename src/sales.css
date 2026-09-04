@@ -26,7 +26,3 @@
 .benefit:nth-child(6) .benefit-icon::after{content:'06'}
 .guide-preview{display:none!important}
 .guide-preview-card,.guide-preview-page{display:none!important}
-/* Preço promocional atualizado para R$ 10,00. */
-.price{font-size:0}
-.price::after{content:'R$ 10,00';font:700 75px/1 Georgia,serif;color:#9e2d4e}
-@media(max-width:520px){.price::after{font-size:65px}}
