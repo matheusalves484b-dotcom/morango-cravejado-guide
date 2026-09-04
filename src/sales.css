@@ -1,12 +1,12 @@
+/* Importa o estilo completo estável do projeto. */
 @import url('https://raw.githubusercontent.com/matheusalves484b-dotcom/morango-cravejado-guide/ca8f36515a48cd3f8dd2af58fbdd67e8a8a28834/src/sales.css');
 
-/* Correção definitiva: remove o ,90 residual e mantém somente R$ 10,00. */
+/* Ajustes finais de preço e primeira dobra. */
 .price{font-size:0!important}
 .price::after{content:'R$ 10,00';font:700 75px/1 Georgia,serif;color:#9e2d4e}
 .price small,.price sup{display:none!important}
 @media(max-width:520px){.price::after{font-size:65px}}
 
-/* Preço destacado na primeira dobra para deixar a oferta clara antes do scroll. */
 .hero-price{display:flex;align-items:center;gap:12px;margin:0 0 22px;padding:12px 16px;width:max-content;max-width:100%;border:1px solid #ffffff25;border-radius:12px;background:#ffffff0d;box-shadow:0 10px 30px #0002}
 .hero-price span{font-size:9px;font-weight:900;letter-spacing:.12em;color:#ffc977}
 .hero-price strong{font:700 30px/1 Georgia,serif;color:#fff}
