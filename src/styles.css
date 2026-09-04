@@ -4,44 +4,17 @@
 
 @theme inline {
   --font-display: var(--font-display); --font-body: var(--font-body);
-  --color-background: var(--background); --color-foreground: var(--foreground);
-  --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground);
-  --color-border: var(--border); --color-card: var(--card); --color-card-foreground: var(--card-foreground);
+  --color-background: var(--background); --color-foreground: var(--foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-border: var(--border); --color-card: var(--card); --color-card-foreground: var(--card-foreground);
   --color-gold: var(--gold); --color-raspberry: var(--raspberry); --color-chocolate: var(--chocolate);
 }
 
-:root {
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "Montserrat", Arial, sans-serif;
-  --background: oklch(0.985 0.012 59);
-  --foreground: oklch(0.22 0.033 331);
-  --primary: oklch(0.31 0.105 336);
-  --primary-foreground: oklch(0.99 0.01 65);
-  --secondary: oklch(0.948 0.025 55);
-  --secondary-foreground: oklch(0.31 0.105 336);
-  --muted: oklch(0.93 0.018 55);
-  --muted-foreground: oklch(0.46 0.035 330);
-  --accent: oklch(0.51 0.155 353);
-  --accent-foreground: oklch(1 0 0);
-  --border: oklch(0.78 0.075 78 / 55%);
-  --card: oklch(1 0 0); --card-foreground: oklch(0.22 0.033 331);
-  --gold: oklch(0.69 0.12 77); --raspberry: oklch(0.51 0.155 353); --chocolate: oklch(0.22 0.033 331);
-}
+:root { --font-display: "Playfair Display", Georgia, serif; --font-body: "Montserrat", Arial, sans-serif; --background: oklch(0.985 0.012 59); --foreground: oklch(0.22 0.033 331); --primary: oklch(0.31 0.105 336); --primary-foreground: oklch(0.99 0.01 65); --secondary: oklch(0.948 0.025 55); --secondary-foreground: oklch(0.31 0.105 336); --muted: oklch(0.93 0.018 55); --muted-foreground: oklch(0.46 0.035 330); --accent: oklch(0.51 0.155 353); --accent-foreground: oklch(1 0 0); --border: oklch(0.78 0.075 78 / 55%); --card: oklch(1 0 0); --card-foreground: oklch(0.22 0.033 331); --gold: oklch(0.69 0.12 77); --raspberry: oklch(0.51 0.155 353); --chocolate: oklch(0.22 0.033 331); }
 
-@layer base {
-  * { border-color: var(--border); }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body); }
-  button { font-family: inherit; }
-}
+@layer base { * { border-color: var(--border); } html { scroll-behavior: smooth; } body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body); } button { font-family: inherit; } }
 
-@utility book-page {
-  width: min(100%, 794px); min-height: 1123px; margin-inline: auto; background: var(--card); position: relative; overflow: hidden;
-  padding: 76px 74px 64px; box-shadow: 0 24px 60px color-mix(in oklab, var(--chocolate) 16%, transparent);
-}
+@utility book-page { width: min(100%, 794px); min-height: 1123px; margin-inline: auto; background: var(--card); position: relative; overflow: hidden; padding: 76px 74px 64px; box-shadow: 0 24px 60px color-mix(in oklab, var(--chocolate) 16%, transparent); }
 @utility book-title { font-family: var(--font-display); font-weight: 600; letter-spacing: 0; line-height: .98; }
 @utility gold-rule { height: 1px; width: 58px; background: var(--gold); }
 @utility eyebrow { color: var(--primary); font-size: 10px; letter-spacing: .2em; font-weight: 700; text-transform: uppercase; }
@@ -55,10 +28,10 @@
 
 .internal-page { display: flex; flex-direction: column; }
 .internal-header { position: relative; z-index: 2; flex: 0 0 auto; text-align: center; }
-.internal-meta { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.internal-meta { display: flex; align-items: center; justify-content: center; gap: 18px; text-align: center; }
 .chapter-number { color: var(--gold); font-family: var(--font-display); font-size: 28px; line-height: 1; }
 .internal-header .gold-rule { margin-inline: auto; }
-.internal-lead { max-width: 640px; margin: 18px auto 0; color: var(--muted-foreground); font-size: 13px; line-height: 1.8; }
+.internal-lead { width: 100%; max-width: 640px; margin: 18px auto 0; color: var(--muted-foreground); font-size: 13px; line-height: 1.8; text-align: center; }
 .internal-body { position: relative; z-index: 2; flex: 1; min-height: 0; margin-top: 25px; display: flex; flex-direction: column; justify-content: center; }
 .internal-footer { position: absolute; left: 74px; right: 74px; bottom: 29px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 9px; color: var(--muted-foreground); font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
 .internal-footer span:last-child { color: var(--gold); font-family: var(--font-display); font-size: 14px; letter-spacing: 0; }
@@ -69,12 +42,10 @@
 .info-label { color: var(--primary); font-size: 10px; font-weight: 800; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; }
 .info-text { color: var(--foreground); font-size: 11px; font-weight: 600; line-height: 1.55; }
 .info-description { margin-top: 5px; color: var(--muted-foreground); font-size: 10px; line-height: 1.55; }
-
 .tip-card { margin-top: 12px; display: grid; grid-template-columns: 25px 1fr; gap: 10px; align-items: start; padding: 13px 15px; background: var(--chocolate); color: var(--primary-foreground); border-left: 3px solid var(--gold); }
 .tip-card svg { color: var(--gold); margin-top: 2px; }
 .tip-card strong { display: block; color: var(--gold); font-size: 8px; letter-spacing: .18em; }
 .tip-card p { margin-top: 4px; font-size: 9.5px; line-height: 1.55; }
-
 .recipe-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-content: center; }
 .recipe-steps { display: grid; gap: 8px; }
 .recipe-step { display: grid; grid-template-columns: 32px 1fr; gap: 11px; padding-bottom: 9px; border-bottom: 1px solid var(--border); }
@@ -82,7 +53,6 @@
 .recipe-label { color: var(--primary); font-size: 8px; font-weight: 800; letter-spacing: .14em; }
 .recipe-text { margin-top: 3px; color: var(--foreground); font-size: 9.5px; line-height: 1.55; }
 .recipe-layout .tip-card { align-self: end; margin-top: 0; }
-
 .editorial-table { border: 1px solid var(--border); background: var(--card); }
 .table-row { display: grid; grid-template-columns: 42px 1fr; gap: 14px; padding: 12px 15px; border-bottom: 1px solid var(--border); }
 .table-row:nth-child(odd) { background: var(--secondary); }
@@ -90,7 +60,6 @@
 .table-index { color: var(--gold); font-family: var(--font-display); font-size: 16px; }
 .table-label { color: var(--primary); font-size: 8px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
 .table-text { margin-top: 3px; color: var(--foreground); font-size: 9.5px; line-height: 1.55; }
-
 .image-layout { display: grid; grid-template-columns: 48% 1fr; gap: 24px; align-items: center; }
 .image-frame { height: 360px; overflow: hidden; border: 7px solid var(--secondary); outline: 1px solid var(--border); box-shadow: 0 14px 30px color-mix(in oklab, var(--chocolate) 12%, transparent); }
 .image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -98,9 +67,7 @@
 .editorial-bullet { display: grid; grid-template-columns: 27px 1fr; gap: 9px; padding-bottom: 11px; border-bottom: 1px solid var(--border); }
 .editorial-bullet span { color: var(--gold); font-family: var(--font-display); font-size: 15px; }
 .editorial-bullet p { color: var(--foreground); font-size: 9.5px; line-height: 1.55; }
-
 .internal-impact .internal-body { justify-content: center; }
-/* Os três cards de impacto ficam claros para manter leitura e unidade visual com o restante do ebook. */
 .internal-impact { width: 100%; max-width: 650px; margin-inline: auto; padding: 34px 38px; background: linear-gradient(135deg, var(--secondary), var(--card)); color: var(--foreground); border-top: 3px solid var(--gold); border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); border-right: 1px solid var(--border); box-shadow: 0 18px 40px color-mix(in oklab, var(--chocolate) 10%, transparent); }
 .impact-icon { width: 42px; height: 42px; display: grid; place-items: center; margin: 0 auto 18px; border: 1px solid var(--gold); color: var(--primary); border-radius: 50%; }
 .impact-statement { color: var(--primary); font-family: var(--font-display); font-size: 24px; line-height: 1.18; text-align: center; }
@@ -108,7 +75,6 @@
 .impact-point { display: flex; gap: 9px; color: var(--foreground); font-size: 9.5px; line-height: 1.55; }
 .impact-point svg { flex: 0 0 auto; color: var(--gold); margin-top: 2px; }
 .internal-impact + .tip-card { max-width: 650px; margin-inline: auto; }
-
 .toc-item { transition: transform .2s ease, padding .2s ease; }
 .toc-item:hover { transform: translateX(4px); }
 .cover-page { min-height: 1123px; }
@@ -151,13 +117,30 @@
 }
 
 @media (max-width: 700px) {
-  .book-page { min-height: 100svh; padding: 52px 32px 58px; }
-  .editorial-page::before { inset: 12px; }
-  .page-number { right: 28px; bottom: 26px; }
-  .internal-footer { left: 32px; right: 32px; bottom: 22px; }
-  .list-layout, .recipe-layout, .image-layout { grid-template-columns: 1fr; }
-  .image-frame { height: 250px; }
-  .internal-body { justify-content: flex-start; overflow: auto; padding-bottom: 35px; }
-  .internal-impact { padding: 26px 24px; }
-  .impact-statement { font-size: 22px; }
+  .screen-nav { padding: 10px 16px; }
+  .screen-nav > div { width: 100%; max-width: none; gap: 8px; }
+  .screen-nav button { min-width: 0; padding: 7px 2px; font-size: 9px; letter-spacing: .09em; white-space: nowrap; }
+  .screen-nav span { flex: 1; min-width: 0; text-align: center; font-size: 15px; white-space: nowrap; }
+  .book-page { width: 100%; min-height: 100svh; box-sizing: border-box; padding: 48px 22px 64px; }
+  .editorial-page::before { inset: 10px; }
+  .internal-header { width: 100%; text-align: center; }
+  .internal-meta { flex-direction: column; gap: 7px; align-items: center; justify-content: center; }
+  .internal-meta .eyebrow { display: block; max-width: 100%; text-align: center; line-height: 1.45; }
+  .chapter-number { font-size: 23px; }
+  .internal-header .gold-rule { width: 46px; margin: 14px auto 0; }
+  .internal-header .book-title { width: 100%; max-width: 100%; margin-top: 16px; font-size: clamp(30px, 8vw, 40px); line-height: 1.04; text-align: center; overflow-wrap: anywhere; }
+  .internal-lead { width: 100%; max-width: 340px; margin: 14px auto 0; padding: 0 4px; font-size: 11px; line-height: 1.65; text-align: center; }
+  .internal-body { width: 100%; margin-top: 22px; justify-content: flex-start; overflow: visible; padding-bottom: 42px; }
+  .list-layout, .recipe-layout, .image-layout { width: 100%; grid-template-columns: 1fr; }
+  .info-card { width: 100%; box-sizing: border-box; grid-template-columns: 30px 1fr; gap: 10px; padding: 13px 12px; }
+  .tip-card { width: 100%; box-sizing: border-box; }
+  .recipe-layout { gap: 16px; }
+  .image-frame { width: 100%; height: 250px; }
+  .internal-footer { left: 22px; right: 22px; bottom: 22px; font-size: 7px; letter-spacing: .09em; }
+  .internal-footer span:last-child { font-size: 12px; }
+  .internal-impact { width: 100%; box-sizing: border-box; padding: 25px 20px; }
+  .impact-statement { font-size: clamp(20px, 6vw, 25px); line-height: 1.2; }
+  .impact-points { margin-top: 16px; gap: 7px; }
+  .impact-point { font-size: 9px; line-height: 1.5; }
+  .toc-item { align-items: center; }
 }
