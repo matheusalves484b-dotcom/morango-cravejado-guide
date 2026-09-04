@@ -143,4 +143,11 @@
   .impact-points { margin-top: 16px; gap: 7px; }
   .impact-point { font-size: 9px; line-height: 1.5; }
   .toc-item { align-items: center; }
+
+  /* Capa mobile: o texto ocupa uma área própria e a foto começa abaixo dele. */
+  .cover-page { min-height: 100svh; padding-top: 42px; }
+  .cover-page > div:first-child { position: relative; z-index: 10; padding-bottom: 42px; }
+  .cover-page > div:first-child > p:last-child { max-width: 330px; margin-top: 28px; line-height: 1.65; }
+  .cover-page > img { height: 34%; min-height: 245px; object-position: center center; }
+  .cover-page > div:last-child { position: relative; z-index: 10; margin-top: auto; }
 }
