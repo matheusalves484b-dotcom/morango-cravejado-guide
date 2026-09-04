@@ -90,30 +90,29 @@
   .internal-footer { left: 19.5mm; right: 19.5mm; bottom: 9mm; }
   .internal-lead { font-size: 11px; margin-top: 12px; line-height: 1.55; }
   .internal-body { margin-top: 17px; }
-  .list-layout { gap: 9px; }
-  .info-card { min-height: 84px; padding: 13px 14px; grid-template-columns: 34px 1fr; gap: 11px; }
-  .info-number { font-size: 17px; }
-  .info-label { font-size: 8px; line-height: 1.45; }
-  .info-text { font-size: 9.5px; line-height: 1.48; }
-  .info-description { font-size: 9px; line-height: 1.48; }
-  .tip-card { padding: 11px 13px; margin-top: 9px; grid-template-columns: 25px 1fr; gap: 10px; }
-  .tip-card strong { font-size: 8px; }
-  .tip-card p { font-size: 9.5px; line-height: 1.48; }
-  .recipe-layout { gap: 16px; }
-  .recipe-steps { gap: 6px; }
-  .recipe-step { padding-bottom: 7px; grid-template-columns: 28px 1fr; gap: 10px; }
-  .recipe-number { font-size: 14px; }
-  .recipe-label, .table-label { font-size: 8px; }
-  .recipe-text, .table-text, .editorial-bullet p, .impact-point { font-size: 9.5px; line-height: 1.48; }
-  .table-row { padding: 10px 13px; grid-template-columns: 34px 1fr; gap: 10px; }
-  .table-index { font-size: 14px; }
+  .list-layout { gap: 7px; }
+  .info-card { min-height: 67px; padding: 10px 12px; grid-template-columns: 28px 1fr; gap: 9px; }
+  .info-number { font-size: 15px; }
+  .info-label { font-size: 7px; }
+  .info-text, .info-description { font-size: 8px; line-height: 1.4; }
+  .tip-card { padding: 9px 11px; margin-top: 7px; }
+  .tip-card strong { font-size: 7px; }
+  .tip-card p { font-size: 8px; line-height: 1.4; }
+  .recipe-layout { gap: 14px; }
+  .recipe-steps { gap: 5px; }
+  .recipe-step { padding-bottom: 6px; grid-template-columns: 25px 1fr; }
+  .recipe-number { font-size: 13px; }
+  .recipe-label, .table-label { font-size: 7px; }
+  .recipe-text, .table-text, .editorial-bullet p, .impact-point { font-size: 8px; line-height: 1.4; }
+  .table-row { padding: 8px 11px; grid-template-columns: 30px 1fr; gap: 9px; }
+  .table-index { font-size: 13px; }
   .image-layout { gap: 16px; }
   .image-frame { height: 275px; }
-  .editorial-bullet { padding-bottom: 8px; }
-  .editorial-bullet span { font-size: 13px; }
-  .internal-impact { padding: 28px 32px; }
-  .impact-statement { font-size: 21px; }
-  .impact-points { margin-top: 16px; gap: 6px; }
+  .editorial-bullet { padding-bottom: 7px; }
+  .editorial-bullet span { font-size: 12px; }
+  .internal-impact { padding: 25px 30px; }
+  .impact-statement { font-size: 19px; }
+  .impact-points { margin-top: 14px; gap: 5px; }
   img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
