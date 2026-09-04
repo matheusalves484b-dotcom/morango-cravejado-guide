@@ -1,6 +1,7 @@
+import "@/sales.css";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Check, ChevronDown, Clock3, Gift, ShieldCheck, Sparkles, Star, X } from "lucide-react";
+import { Check, ChevronDown, Clock3, Gift, ShieldCheck, Sparkles, Star } from "lucide-react";
 import coverImage from "@/assets/morango-cravejado-cover.jpg";
 import detailImage from "@/assets/morango-cravejado-detail.jpg";
 import packagingImage from "@/assets/morango-cravejado-packaging.jpg";
@@ -8,147 +9,45 @@ import packagingImage from "@/assets/morango-cravejado-packaging.jpg";
 const CHECKOUT_URL = "#oferta";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Morango Cravejado — Aprenda Antes da Multidão" },
-      { name: "description", content: "Aprenda a preparar, padronizar, precificar e vender Morango Cravejado com um guia prático." },
-      { property: "og:title", content: "Morango Cravejado — Aprenda Antes da Multidão" },
-      { property: "og:description", content: "Uma nova oportunidade para quem quer chegar cedo em uma tendência de doces artesanais." },
-      { property: "og:image", content: "/src/assets/morango-cravejado-cover.jpg" },
-      { property: "og:type", content: "website" },
-      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-    ],
-  }),
+  head: () => ({ meta: [
+    { title: "Morango Cravejado — Aprenda Antes da Multidão" },
+    { name: "description", content: "Aprenda a preparar, padronizar, precificar e vender Morango Cravejado com um guia prático." },
+    { property: "og:title", content: "Morango Cravejado — Aprenda Antes da Multidão" },
+    { property: "og:description", content: "Uma nova oportunidade para quem quer chegar cedo em uma tendência de doces artesanais." },
+    { property: "og:type", content: "website" },
+  ] }),
   component: SalesPage,
 });
 
 function CTA({ children = "QUERO APRENDER O MORANGO CRAVEJADO" }: { children?: React.ReactNode }) {
-  return (
-    <a className="cta" href={CHECKOUT_URL} onClick={(e) => { if (CHECKOUT_URL === "#oferta") { e.preventDefault(); document.querySelector("#oferta")?.scrollIntoView({ behavior: "smooth" }); } }}>
-      <span>{children}</span><span className="cta-arrow">→</span>
-    </a>
-  );
+  return <a className="cta" href={CHECKOUT_URL} onClick={(e) => { e.preventDefault(); document.querySelector("#oferta")?.scrollIntoView({ behavior: "smooth" }); }}><span>{children}</span><span className="cta-arrow">→</span></a>;
 }
 
 function SalesPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [time, setTime] = useState({ h: 2, m: 59, s: 59 });
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setTime((t) => {
-        if (t.h === 0 && t.m === 0 && t.s === 0) return { h: 2, m: 59, s: 59 };
-        if (t.s > 0) return { ...t, s: t.s - 1 };
-        if (t.m > 0) return { h: t.h, m: t.m - 1, s: 59 };
-        return { h: t.h - 1, m: 59, s: 59 };
-      });
-    }, 1000);
-    return () => window.clearInterval(timer);
-  }, []);
-
+  useEffect(() => { const timer = window.setInterval(() => setTime(t => { if (!t.h && !t.m && !t.s) return {h:2,m:59,s:59}; if(t.s) return {...t,s:t.s-1}; if(t.m) return {h:t.h,m:t.m-1,s:59}; return {h:t.h-1,m:59,s:59}; }),1000); return()=>window.clearInterval(timer); }, []);
   const faqs = [
     ["O que eu recebo?", "Você recebe o guia digital do Morango Cravejado, com preparo, montagem, padronização, ficha técnica, precificação, embalagem, conteúdo e estratégias práticas de venda."],
-    ["Preciso ter experiência com doces?", "Não. O material foi pensado para quem está começando e quer seguir um processo organizado, mas também serve para quem já vende doces e quer testar um novo produto."],
+    ["Preciso ter experiência com doces?", "Não. O material foi pensado para quem está começando e também serve para quem já vende doces e quer testar um novo produto."],
     ["Posso vender o Morango Cravejado?", "Sim. O guia mostra como transformar a receita em produto: padronização, custos, preço, embalagem, conteúdo e atendimento. Resultados financeiros não são garantidos e dependem de execução, mercado e divulgação."],
     ["O acesso é imediato?", "Sim. Após a confirmação do pagamento, o acesso é liberado pela plataforma de entrega utilizada na sua compra."],
-    ["Existe garantia?", "Sim. A oferta pode incluir garantia conforme as condições apresentadas no checkout. Confira os termos no momento da compra."],
+    ["Existe garantia?", "Confira no checkout as condições de garantia aplicáveis à oferta."],
   ];
-
-  return (
-    <main className="sales-page">
-      <div className="topbar"><Clock3 size={15} /> <strong>OPORTUNIDADE DE LANÇAMENTO</strong><span>Entre cedo enquanto a novidade chama atenção.</span></div>
-
-      <section className="hero">
-        <div className="hero-glow" />
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <div className="eyebrow"><Sparkles size={15} /> NOVA ONDA DOS DOCES ARTESANAIS</div>
-            <h1>O próximo doce que pode <em>parar o scroll</em> já tem nome.</h1>
-            <p className="hero-sub">Conheça o <strong>Morango Cravejado</strong>: uma combinação irresistível de morango, cremosidade, chocolate e crocância — criada para chamar atenção e virar desejo.</p>
-            <p className="hero-opportunity"><b>O segredo?</b> Não é esperar a tendência ficar lotada. É aprender, testar e se posicionar <b>antes da multidão.</b></p>
-            <CTA />
-            <div className="microproof"><span>✓ Guia digital</span><span>✓ Acesso prático</span><span>✓ Feito para começar</span></div>
-          </div>
-          <div className="hero-product">
-            <div className="floating-badge"><span>🔥</span><b>NOVIDADE</b><small>chegue primeiro</small></div>
-            <img src={coverImage} alt="Capa do guia Morango Cravejado" />
-            <div className="product-shadow" />
-          </div>
-        </div>
-      </section>
-
-      <section className="ticker"><div className="ticker-track"><span>🍓 MORANGO CRAVEJADO</span><span>✨ NOVA OPORTUNIDADE</span><span>🍓 MORANGO CRAVEJADO</span><span>✨ NOVA OPORTUNIDADE</span><span>🍓 MORANGO CRAVEJADO</span></div></section>
-
-      <section className="section light" id="oportunidade">
-        <div className="container narrow center">
-          <div className="eyebrow dark">VOCÊ JÁ VIU ISSO ACONTECER</div>
-          <h2>Quando um doce vira febre, quem chega <span>primeiro</span> ganha atenção.</h2>
-          <p>O Morango do Amor mostrou como uma apresentação diferente pode transformar uma fruta conhecida em um produto desejado, compartilhado e vendido em escala artesanal.</p>
-          <p className="strong-line">Agora a pergunta é: <b>você vai observar a próxima onda ou vai aprender a trabalhar nela?</b></p>
-        </div>
-        <div className="container comparison">
-          <div className="comparison-card muted"><span className="number">01</span><h3>Esperar ficar famoso</h3><p>Você só entra quando todo mundo já está vendendo, disputando atenção e tentando copiar as mesmas ofertas.</p><div className="bad">× Chegada tardia</div></div>
-          <div className="comparison-arrow">VS</div>
-          <div className="comparison-card featured"><span className="number">02</span><h3>Chegar cedo</h3><p>Você aprende o produto, cria seu padrão, testa preço e começa a construir conteúdo enquanto a novidade ainda desperta curiosidade.</p><div className="good">✓ Posicionamento antecipado</div></div>
-        </div>
-      </section>
-
-      <section className="section dark-section">
-        <div className="container two-col visual-section">
-          <div><img className="rounded-image" src={detailImage} alt="Detalhe do Morango Cravejado" /></div>
-          <div className="section-copy"><div className="eyebrow">A NOVA EXPERIÊNCIA</div><h2>Não é só um morango bonito. É um produto pensado para <span>vender pelos olhos.</span></h2><p>O contraste do vermelho, chocolate, creme e cristais crocantes cria um visual que funciona muito bem em fotos, Reels, Stories e vídeos de corte.</p><ul className="check-list"><li><Check /> Aparência marcante</li><li><Check /> Textura e contraste</li><li><Check /> Fácil de mostrar em vídeo</li><li><Check /> Pode ser vendido por unidade ou em caixas</li><li><Check /> Permite versões presenteáveis</li></ul></div>
-        </div>
-      </section>
-
-      <section className="section light">
-        <div className="container center narrow"><div className="eyebrow dark">O QUE VOCÊ VAI APRENDER</div><h2>Um guia para sair da ideia e chegar até a <span>venda.</span></h2><p>Não queremos entregar apenas uma receita. A proposta é mostrar o caminho completo para transformar o Morango Cravejado em um produto organizado.</p></div>
-        <div className="container benefits-grid">
-          {[
-            ["🍓", "Preparo completo", "Entenda cada etapa da montagem e os pontos que mais interferem no resultado."],
-            ["⚖️", "Padronização", "Aprenda a pensar em peso, rendimento e repetição para produzir com consistência."],
-            ["💰", "Custos e preço", "Monte sua ficha técnica e descubra quanto realmente custa cada unidade."],
-            ["📦", "Embalagem", "Escolha formatos que valorizem o produto e facilitem a apresentação."],
-            ["📱", "Conteúdo", "Ideias de Reels, fotos e Stories para apresentar o produto e gerar desejo."],
-            ["💬", "Venda", "Estruture atendimento, combos, encomendas e mensagens para facilitar o pedido."],
-          ].map(([icon, title, text]) => <article className="benefit" key={title}><div className="benefit-icon">{icon}</div><h3>{title}</h3><p>{text}</p></article>)}
-        </div>
-      </section>
-
-      <section className="section cream">
-        <div className="container two-col reverse-mobile">
-          <div className="section-copy"><div className="eyebrow dark">NÃO VENDA NO ESCURO</div><h2>Antes de colocar um preço, descubra <span>quanto custa produzir.</span></h2><p>Um dos erros mais comuns de quem começa a vender doces é olhar apenas para o preço dos ingredientes. O guia ensina a organizar custos, perdas, embalagem e produção para tomar decisões melhores.</p><div className="formula"><small>VISÃO SIMPLIFICADA</small><b>Custo real + margem desejada + posicionamento = preço sustentável</b></div><CTA>QUERO APRENDER A PRECIFICAR</CTA></div>
-          <div className="cost-card"><div className="cost-row"><span>Ingredientes</span><b>R$ __</b></div><div className="cost-row"><span>Embalagem</span><b>R$ __</b></div><div className="cost-row"><span>Perdas / produção</span><b>R$ __</b></div><div className="cost-total"><span>CUSTO REAL</span><strong>R$ __</strong></div><div className="price-tag">Agora sim: defina seu preço com estratégia.</div></div>
-        </div>
-      </section>
-
-      <section className="section dark-section launch">
-        <div className="container center narrow"><div className="eyebrow">O MOMENTO É AGORA</div><h2>Enquanto alguns ainda estão descobrindo, você pode estar <span>testando.</span></h2><p>Não existe garantia de que um produto será viral ou de que você terá lucro. Mas existe uma diferença entre esperar uma tendência ficar saturada e se preparar para testar uma oportunidade enquanto ela ainda é nova.</p></div>
-        <div className="container launch-steps">{[["01", "Aprenda", "Conheça a técnica e entenda o produto."], ["02", "Teste", "Faça pequenas produções e ajuste seu padrão."], ["03", "Publique", "Mostre o produto de forma irresistível."], ["04", "Venda", "Abra encomendas e descubra o que o seu público quer."]].map(([n,t,d]) => <div className="launch-step" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div>
-      </section>
-
-      <section className="section light offer-intro">
-        <div className="container center narrow"><div className="eyebrow dark">AGORA, A PARTE MAIS IMPORTANTE</div><h2>Você não precisa de uma cozinha profissional para <span>começar a testar.</span></h2><p>Comece pequeno. Aprenda o processo. Faça algumas unidades. Fotografe. Mostre. Escute o cliente. Ajuste. E só depois aumente a produção.</p></div>
-        <div className="container image-strip"><img src={packagingImage} alt="Embalagem do Morango Cravejado" /><div><div className="mini-card"><Gift /><b>Apresentação que valoriza</b><span>O produto começa a ser vendido antes mesmo da primeira mordida.</span></div><div className="mini-card"><Star /><b>Produto fotografável</b><span>Use textura, corte e montagem para criar conteúdo.</span></div></div></div>
-      </section>
-
-      <section className="section offer-section" id="oferta">
-        <div className="container offer-card">
-          <div className="offer-ribbon">CONDIÇÃO ESPECIAL DE LANÇAMENTO</div>
-          <div className="offer-content"><div className="offer-copy"><div className="eyebrow">MORANGO CRAVEJADO</div><h2>Entre agora e comece a aprender antes que a novidade fique <span>comum.</span></h2><p>Tenha o guia completo para preparar, padronizar, precificar, apresentar e vender o Morango Cravejado.</p><div className="included"><b>Você recebe:</b><span>✓ Guia completo de preparo e montagem</span><span>✓ Ficha técnica e organização de custos</span><span>✓ Estratégias de precificação</span><span>✓ Ideias de conteúdo e divulgação</span><span>✓ Orientações de embalagem e venda</span></div></div>
-            <div className="price-box"><div className="price-label">ACESSO AO GUIA DIGITAL</div><div className="old-price">de R$ 47,00</div><div className="price"><small>R$</small>19<sup>,90</sup></div><div className="price-note">pagamento único</div><CTA>QUERO COMEÇAR AGORA</CTA><div className="secure"><ShieldCheck size={16}/> Compra protegida • acesso digital</div></div>
-          </div>
-          <div className="countdown"><b>⏳ CONDIÇÃO DE LANÇAMENTO</b><span>Esta oferta pode ser alterada conforme a campanha. Tempo exibido apenas como elemento de urgência visual.</span><div className="digits"><div><strong>{String(time.h).padStart(2,"0")}</strong><small>HORAS</small></div><i>:</i><div><strong>{String(time.m).padStart(2,"0")}</strong><small>MIN</small></div><i>:</i><div><strong>{String(time.s).padStart(2,"0")}</strong><small>SEG</small></div></div></div>
-        </div>
-      </section>
-
-      <section className="section guarantee light"><div className="container guarantee-card"><ShieldCheck size={48}/><div><div className="eyebrow dark">COMPRA COM TRANQUILIDADE</div><h2>Você tem tempo para conhecer o material.</h2><p>Consulte no checkout as condições da garantia aplicáveis à oferta. Se a política apresentada permitir, você poderá solicitar o reembolso dentro do prazo informado.</p></div></div></section>
-
-      <section className="section faq-section"><div className="container narrow"><div className="center"><div className="eyebrow dark">AINDA TEM DÚVIDAS?</div><h2>Perguntas <span>frequentes.</span></h2></div><div className="faq-list">{faqs.map(([q,a], i) => <div className={`faq ${openFaq === i ? "open" : ""}`} key={q}><button onClick={() => setOpenFaq(openFaq === i ? null : i)}><span>{q}</span><ChevronDown size={20}/></button>{openFaq === i && <p>{a}</p>}</div>)}</div></div></section>
-
-      <section className="final-cta"><div className="container center"><div className="eyebrow">🍓 SUA PRÓXIMA IDEIA PODE COMEÇAR AQUI</div><h2>Não espere a próxima febre chegar para só então procurar como fazer.</h2><p>Aprenda o Morango Cravejado, teste no seu público e descubra se essa oportunidade faz sentido para você.</p><CTA>QUERO CHEGAR PRIMEIRO</CTA><small>Oportunidade não é promessa de lucro. Seus resultados dependem de execução, mercado, custos, preço e divulgação.</small></div></section>
-
-      <footer><div className="container footer-inner"><span>© 2026 Morango Cravejado</span><div><a href="#">Termos</a><a href="#">Privacidade</a></div></div></footer>
-      <div className="mobile-sticky"><CTA>QUERO O GUIA • R$ 19,90</CTA></div>
-    </main>
-  );
+  return <main className="sales-page">
+    <div className="topbar"><Clock3 size={15}/><strong>OPORTUNIDADE DE LANÇAMENTO</strong><span>Entre cedo enquanto a novidade chama atenção.</span></div>
+    <section className="hero"><div className="hero-glow"/><div className="container hero-grid"><div className="hero-copy"><div className="eyebrow"><Sparkles size={15}/> NOVA ONDA DOS DOCES ARTESANAIS</div><h1>O próximo doce que pode <em>parar o scroll</em> já tem nome.</h1><p className="hero-sub">Conheça o <strong>Morango Cravejado</strong>: uma combinação de morango, cremosidade, chocolate e crocância — criada para chamar atenção e virar desejo.</p><p className="hero-opportunity"><b>O segredo?</b> Não é esperar a tendência ficar lotada. É aprender, testar e se posicionar <b>antes da multidão.</b></p><CTA/><div className="microproof"><span>✓ Guia digital</span><span>✓ Acesso prático</span><span>✓ Feito para começar</span></div></div><div className="hero-product"><div className="floating-badge"><span>🔥</span><b>NOVIDADE</b><small>chegue primeiro</small></div><img src={coverImage} alt="Capa do guia Morango Cravejado"/></div></div></section>
+    <section className="ticker"><div className="ticker-track"><span>🍓 MORANGO CRAVEJADO</span><span>✨ NOVA OPORTUNIDADE</span><span>🍓 MORANGO CRAVEJADO</span><span>✨ NOVA OPORTUNIDADE</span></div></section>
+    <section className="section light"><div className="container narrow center"><div className="eyebrow dark">VOCÊ JÁ VIU ISSO ACONTECER</div><h2>Quando um doce vira febre, quem chega <span>primeiro</span> ganha atenção.</h2><p>O Morango do Amor mostrou como uma apresentação diferente pode transformar uma fruta conhecida em um produto desejado, compartilhado e vendido por produtores artesanais.</p><p className="strong-line">Agora a pergunta é: <b>você vai observar a próxima onda ou vai aprender a trabalhar nela?</b></p></div><div className="container comparison"><div className="comparison-card"><span className="number">01</span><h3>Esperar ficar famoso</h3><p>Você só entra quando todo mundo já está vendendo e disputando atenção.</p><div className="bad">× Chegada tardia</div></div><div className="comparison-arrow">VS</div><div className="comparison-card featured"><span className="number">02</span><h3>Chegar cedo</h3><p>Você aprende, cria seu padrão, testa preço e constrói conteúdo enquanto a novidade ainda desperta curiosidade.</p><div className="good">✓ Posicionamento antecipado</div></div></div></section>
+    <section className="section dark-section"><div className="container two-col"><img className="rounded-image" src={detailImage} alt="Detalhe do Morango Cravejado"/><div className="section-copy"><div className="eyebrow">A NOVA EXPERIÊNCIA</div><h2>Um produto pensado para <span>vender pelos olhos.</span></h2><p>O contraste do vermelho, chocolate, creme e cristais crocantes cria um visual forte para fotos, Reels, Stories e vídeos de corte.</p><ul className="check-list"><li><Check/> Aparência marcante</li><li><Check/> Textura e contraste</li><li><Check/> Fácil de mostrar em vídeo</li><li><Check/> Venda por unidade ou em caixas</li><li><Check/> Versões presenteáveis</li></ul></div></div></section>
+    <section className="section light"><div className="container center narrow"><div className="eyebrow dark">O QUE VOCÊ VAI APRENDER</div><h2>Um guia para sair da ideia e chegar até a <span>venda.</span></h2><p>Não queremos entregar apenas uma receita. A proposta é mostrar o caminho completo para transformar o Morango Cravejado em um produto organizado.</p></div><div className="container benefits-grid">{[["🍓","Preparo completo","Entenda cada etapa da montagem e os pontos que mais interferem no resultado."],["⚖️","Padronização","Pense em peso, rendimento e repetição para produzir com consistência."],["💰","Custos e preço","Monte sua ficha técnica e descubra quanto realmente custa cada unidade."],["📦","Embalagem","Escolha formatos que valorizem o produto e facilitem a apresentação."],["📱","Conteúdo","Ideias de Reels, fotos e Stories para apresentar o produto e gerar desejo."],["💬","Venda","Estruture atendimento, combos, encomendas e mensagens para facilitar o pedido."]].map(([icon,title,text])=><article className="benefit" key={title}><div className="benefit-icon">{icon}</div><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+    <section className="section cream"><div className="container two-col"><div className="section-copy"><div className="eyebrow dark">NÃO VENDA NO ESCURO</div><h2>Antes de colocar um preço, descubra <span>quanto custa produzir.</span></h2><p>Um erro comum é olhar apenas para o preço dos ingredientes. O guia ensina a organizar custos, perdas, embalagem e produção para tomar decisões melhores.</p><div className="formula"><small>VISÃO SIMPLIFICADA</small><b>Custo real + margem desejada + posicionamento = preço sustentável</b></div><CTA>QUERO APRENDER A PRECIFICAR</CTA></div><div className="cost-card"><div className="cost-row"><span>Ingredientes</span><b>R$ __</b></div><div className="cost-row"><span>Embalagem</span><b>R$ __</b></div><div className="cost-row"><span>Perdas / produção</span><b>R$ __</b></div><div className="cost-total"><span>CUSTO REAL</span><strong>R$ __</strong></div><div className="price-tag">Defina seu preço com estratégia.</div></div></div></section>
+    <section className="section dark-section"><div className="container center narrow"><div className="eyebrow">O MOMENTO É AGORA</div><h2>Enquanto alguns ainda estão descobrindo, você pode estar <span>testando.</span></h2><p>Não existe garantia de que um produto será viral ou de que você terá lucro. Mas existe diferença entre esperar uma tendência ficar saturada e se preparar para testar uma oportunidade enquanto ela ainda é nova.</p></div><div className="container launch-steps">{[["01","Aprenda","Conheça a técnica e entenda o produto."],["02","Teste","Faça pequenas produções e ajuste seu padrão."],["03","Publique","Mostre o produto de forma irresistível."],["04","Venda","Abra encomendas e descubra o que seu público quer."]].map(([n,t,d])=><div className="launch-step" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div></section>
+    <section className="section light"><div className="container center narrow"><div className="eyebrow dark">APRESENTAÇÃO QUE VALORIZA</div><h2>O produto começa a ser vendido antes mesmo da <span>primeira mordida.</span></h2><p>Embalagem, textura, corte e fotografia fazem parte da percepção de valor.</p></div><div className="container image-strip"><img src={packagingImage} alt="Embalagem do Morango Cravejado"/><div><div className="mini-card"><Gift/><b>Apresentação premium</b><span>Valorize a experiência de compra com uma embalagem coerente com o produto.</span></div><div className="mini-card"><Star/><b>Conteúdo que dá vontade</b><span>Use close, corte, crocância e bastidores para mostrar o que torna o produto diferente.</span></div></div></div></section>
+    <section className="section offer-section" id="oferta"><div className="container offer-card"><div className="offer-ribbon">CONDIÇÃO ESPECIAL DE LANÇAMENTO</div><div className="offer-content"><div className="offer-copy"><div className="eyebrow">MORANGO CRAVEJADO</div><h2>Entre agora e comece a aprender antes que a novidade fique <span>comum.</span></h2><p>Tenha o guia completo para preparar, padronizar, precificar, apresentar e vender o Morango Cravejado.</p><div className="included"><b>Você recebe:</b><span>✓ Guia completo de preparo e montagem</span><span>✓ Ficha técnica e organização de custos</span><span>✓ Estratégias de precificação</span><span>✓ Ideias de conteúdo e divulgação</span><span>✓ Orientações de embalagem e venda</span></div></div><div className="price-box"><div className="price-label">ACESSO AO GUIA DIGITAL</div><div className="old-price">de R$ 47,00</div><div className="price"><small>R$</small>19<sup>,90</sup></div><div className="price-note">pagamento único</div><CTA>QUERO COMEÇAR AGORA</CTA><div className="secure"><ShieldCheck size={16}/> Compra protegida • acesso digital</div></div></div><div className="countdown"><b>⏳ CONDIÇÃO DE LANÇAMENTO</b><span>O cronômetro é visual e a condição comercial pode ser alterada conforme a campanha.</span><div className="digits"><div><strong>{String(time.h).padStart(2,"0")}</strong><small>HORAS</small></div><i>:</i><div><strong>{String(time.m).padStart(2,"0")}</strong><small>MIN</small></div><i>:</i><div><strong>{String(time.s).padStart(2,"0")}</strong><small>SEG</small></div></div></div></div></section>
+    <section className="section light guarantee"><div className="container guarantee-card"><ShieldCheck size={48}/><div><div className="eyebrow dark">COMPRA COM TRANQUILIDADE</div><h2>Você tem tempo para conhecer o material.</h2><p>Consulte no checkout as condições de garantia aplicáveis à oferta. Se a política apresentada permitir, você poderá solicitar o reembolso dentro do prazo informado.</p></div></div></section>
+    <section className="section faq-section"><div className="container narrow"><div className="center"><div className="eyebrow dark">AINDA TEM DÚVIDAS?</div><h2>Perguntas <span>frequentes.</span></h2></div><div className="faq-list">{faqs.map(([q,a],i)=><div className={`faq ${openFaq===i?"open":""}`} key={q}><button onClick={()=>setOpenFaq(openFaq===i?null:i)}><span>{q}</span><ChevronDown size={20}/></button>{openFaq===i&&<p>{a}</p>}</div>)}</div></div></section>
+    <section className="final-cta"><div className="container center"><div className="eyebrow">🍓 SUA PRÓXIMA IDEIA PODE COMEÇAR AQUI</div><h2>Não espere a próxima febre chegar para só então procurar como fazer.</h2><p>Aprenda o Morango Cravejado, teste no seu público e descubra se essa oportunidade faz sentido para você.</p><CTA>QUERO CHEGAR PRIMEIRO</CTA><small>Oportunidade não é promessa de lucro. Seus resultados dependem de execução, mercado, custos, preço e divulgação.</small></div></section>
+    <footer><div className="container footer-inner"><span>© 2026 Morango Cravejado</span><div><a href="#">Termos</a><a href="#">Privacidade</a></div></div></footer><div className="mobile-sticky"><CTA>QUERO O GUIA • R$ 19,90</CTA></div>
+  </main>;
 }
