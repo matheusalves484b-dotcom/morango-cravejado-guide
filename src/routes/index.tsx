@@ -7,6 +7,13 @@ import detailImage from "@/assets/morango-cravejado-detail.jpg";
 import packagingImage from "@/assets/morango-cravejado-packaging.jpg";
 
 const CHECKOUT_URL = "https://pay.lowify.com.br/checkout?product_id=PErwVu";
+const META_PIXEL_ID = "1764846594706015";
+
+type MetaWindow = Window & {
+  fbq?: (...args: unknown[]) => void;
+  _fbq?: (...args: unknown[]) => void;
+  __metaPixelInitialized?: boolean;
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -32,6 +39,59 @@ function SalesPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [time, setTime] = useState({ h: 2, m: 59, s: 59 });
   useEffect(() => { const timer = window.setInterval(() => setTime(t => { if (!t.h && !t.m && !t.s) return { h: 2, m: 59, s: 59 }; if (t.s) return { ...t, s: t.s - 1 }; if (t.m) return { h: t.h, m: t.m - 1, s: 59 }; return { h: t.h - 1, m: 59, s: 59 }; }), 1000); return () => window.clearInterval(timer); }, []);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const w = window as MetaWindow;
+
+    if (!w.fbq) {
+      const fbq = (...args: unknown[]) => {
+        if (fbq.callMethod) {
+          fbq.callMethod(...args);
+        } else {
+          fbq.queue.push(args);
+        }
+      };
+      fbq.queue = [] as unknown[][];
+      fbq.callMethod = undefined as unknown as (...args: unknown[]) => void;
+      w.fbq = fbq;
+      w._fbq = fbq;
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://connect.facebook.net/en_US/fbevents.js";
+      document.head.appendChild(script);
+    }
+
+    if (!w.__metaPixelInitialized) {
+      w.fbq("init", META_PIXEL_ID);
+      w.fbq("track", "PageView");
+      w.fbq("track", "ViewContent", {
+        content_name: "Morango Cravejado",
+        content_type: "product",
+        content_ids: ["PErwVu"],
+        value: 10,
+        currency: "BRL",
+      });
+      w.__metaPixelInitialized = true;
+    }
+
+    const handleCheckoutClick = (event: MouseEvent) => {
+      const target = event.target as Element | null;
+      const link = target?.closest?.("a") as HTMLAnchorElement | null;
+      if (link?.href === CHECKOUT_URL) {
+        w.fbq?.("track", "InitiateCheckout", {
+          content_name: "Morango Cravejado",
+          content_type: "product",
+          content_ids: ["PErwVu"],
+          value: 10,
+          currency: "BRL",
+        });
+      }
+    };
+
+    document.addEventListener("click", handleCheckoutClick);
+    return () => document.removeEventListener("click", handleCheckoutClick);
+  }, []);
   const faqs = [
     ["O que eu recebo?", "Você recebe o guia digital do Morango Cravejado, com preparo, montagem, padronização, ficha técnica, precificação, embalagem, conteúdo e estratégias práticas de venda."],
     ["Preciso ter experiência com doces?", "Não. O material foi pensado para quem está começando e também serve para quem já vende doces e quer testar um novo produto."],
