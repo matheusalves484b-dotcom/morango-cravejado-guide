@@ -9,9 +9,14 @@ import packagingImage from "@/assets/morango-cravejado-packaging.jpg";
 const CHECKOUT_URL = "https://pay.lowify.com.br/checkout?product_id=PErwVu";
 const META_PIXEL_ID = "1764846594706015";
 
+type MetaFbq = ((...args: unknown[]) => void) & {
+  callMethod?: (...args: unknown[]) => void;
+  queue: unknown[][];
+};
+
 type MetaWindow = Window & {
-  fbq?: (...args: unknown[]) => void;
-  _fbq?: (...args: unknown[]) => void;
+  fbq?: MetaFbq;
+  _fbq?: MetaFbq;
   __metaPixelInitialized?: boolean;
 };
 
@@ -44,15 +49,14 @@ function SalesPage() {
     const w = window as MetaWindow;
 
     if (!w.fbq) {
-      const fbq = (...args: unknown[]) => {
+      const fbq = ((...args: unknown[]) => {
         if (fbq.callMethod) {
           fbq.callMethod(...args);
         } else {
           fbq.queue.push(args);
         }
-      };
-      fbq.queue = [] as unknown[][];
-      fbq.callMethod = undefined as unknown as (...args: unknown[]) => void;
+      }) as MetaFbq;
+      fbq.queue = [];
       w.fbq = fbq;
       w._fbq = fbq;
 
