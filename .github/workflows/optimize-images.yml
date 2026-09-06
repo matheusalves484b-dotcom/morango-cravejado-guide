@@ -52,7 +52,6 @@ jobs:
                   target = source.with_suffix(".webp")
                   with Image.open(source) as image:
                       image.convert("RGB").save(target, "WEBP", quality=78, method=6)
-
           PY
 
       - name: Make hero image responsive
@@ -80,6 +79,18 @@ jobs:
           path.write_text(text, encoding="utf-8")
           PY
 
+      - name: Reduce mobile paint effects
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("src/sales.css")
+          text = path.read_text(encoding="utf-8")
+          marker = "/* MOBILE PERFORMANCE V3 */"
+          if marker not in text:
+              text += "\n" + marker + "\n@media(max-width:850px){.hero-glow{display:none}.hero-product img{filter:none}.mobile-sticky{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fffaf7f7}.benefit,.comparison-card,.offer-card,.guarantee-card,.cost-card{box-shadow:none}.cta{transition:none}}\n"
+              path.write_text(text, encoding="utf-8")
+          PY
+
       - name: Commit optimized assets and responsive markup
         run: |
           if git diff --quiet; then
@@ -88,6 +99,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/assets/*.webp src/routes/index.tsx
-          git commit -m "perf: serve responsive hero assets"
+          git add src/assets/*.webp src/routes/index.tsx src/sales.css
+          git commit -m "perf: optimize mobile first paint"
           git push
