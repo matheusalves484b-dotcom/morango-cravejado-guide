@@ -55,7 +55,32 @@ jobs:
 
           PY
 
-      - name: Commit optimized assets
+      - name: Make hero image responsive
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("src/routes/index.tsx")
+          text = path.read_text(encoding="utf-8")
+
+          if 'morango-cravejado-cover-mobile.webp' not in text:
+              text = text.replace(
+                  'import coverImage from "@/assets/morango-cravejado-cover.webp";\n',
+                  'import coverImage from "@/assets/morango-cravejado-cover.webp";\nimport coverMobileImage from "@/assets/morango-cravejado-cover-mobile.webp";\n'
+              )
+
+          text = text.replace(
+              '{ rel: "preload", href: coverImage, as: "image" },',
+              '{ rel: "preload", href: coverMobileImage, as: "image", media: "(max-width: 850px)" },\n      { rel: "preload", href: coverImage, as: "image", media: "(min-width: 851px)" },'
+          )
+
+          old = '<img src={coverImage} alt="Guia digital Morango Cravejado" fetchPriority="high" decoding="async"/>'
+          new = '<picture><source media="(max-width: 850px)" srcSet={coverMobileImage}/><img src={coverImage} alt="Guia digital Morango Cravejado" fetchPriority="high" decoding="async"/></picture>'
+          text = text.replace(old, new)
+
+          path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Commit optimized assets and responsive markup
         run: |
           if git diff --quiet; then
             echo "No optimized image changes needed."
@@ -63,6 +88,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/assets/*.webp
-          git commit -m "perf: add mobile-sized landing images"
+          git add src/assets/*.webp src/routes/index.tsx
+          git commit -m "perf: serve responsive hero assets"
           git push
