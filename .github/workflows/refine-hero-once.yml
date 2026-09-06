@@ -1,0 +1,48 @@
+name: Refine conversion hero
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Apply safe hero refinements
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/routes/index.tsx")
+          text = path.read_text(encoding="utf-8")
+
+          replacements = {
+              'GUIA COMPLETO POR APENAS</span><strong>R$ 10,00</strong>': 'GUIA COMPLETO POR APENAS </span><strong>R$ 10,00</strong>',
+              'Conheça o <strong>Morango Cravejado</strong>:': 'Aprenda o <strong>Morango Cravejado</strong>:',
+              '<CTA/><div className="microproof"><span>✓ Guia digital</span><span>✓ Passo a passo</span><span>✓ Preparo + venda</span></div>': '<CTA>QUERO O GUIA • R$ 10,00</CTA><div className="microproof"><span>✓ Acesso digital</span><span>✓ Pagamento único</span><span>✓ 7 dias de garantia</span></div>',
+          }
+
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f"Trecho esperado não encontrado: {old[:80]}")
+              text = text.replace(old, new, 1)
+
+          path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Commit refinements and remove one-time workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/routes/index.tsx
+          git rm .github/workflows/refine-hero-once.yml
+          git commit -m "perf: refine hero conversion messaging"
+          git push
