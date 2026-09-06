@@ -1,10 +1,6 @@
 name: Optimize landing page images
 
-on:
-  push:
-    paths:
-      - "src/assets/**/*.jpg"
-      - "src/assets/**/*.jpeg"
+on: push
 
 permissions:
   contents: write
