@@ -1,0 +1,42 @@
+name: Fix social proof section
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-social-proof.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace fabricated testimonials with product highlights
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('src/routes/index.tsx')
+          text = path.read_text(encoding='utf-8')
+
+          pattern = r'<section className="section testimonials-section">.*?</section>\n    <section className="section offer-section"'
+          replacement = '''<section className="section testimonials-section"><div className="container center narrow"><div className="eyebrow dark">O QUE VOCÊ VAI DOMINAR</div><h2>Um guia para sair da <span>receita</span> e chegar ao produto.</h2><p>Veja alguns dos pontos que você encontra no material e pode aplicar na sua produção.</p></div><div className="testimonial-viewport"><div className="testimonial-track"><article className="testimonial-card"><div><div className="testimonial-stars">01 · PREPARO</div><p>Aprenda a organizar o preparo e a montagem do Morango Cravejado, com atenção aos pontos que interferem no resultado.</p></div><div className="testimonial-meta"><b>01</b><span>Preparo e montagem</span></div></article><article className="testimonial-card"><div><div className="testimonial-stars">02 · PADRÃO</div><p>Entenda peso, rendimento e organização para repetir o produto com mais consistência a cada produção.</p></div><div className="testimonial-meta"><b>02</b><span>Padronização</span></div></article><article className="testimonial-card"><div><div className="testimonial-stars">03 · PREÇO</div><p>Organize seus custos e tenha uma base para entender quanto custa cada unidade antes de definir o preço.</p></div><div className="testimonial-meta"><b>03</b><span>Custos e precificação</span></div></article><article className="testimonial-card"><div><div className="testimonial-stars">04 · VENDA</div><p>Veja ideias para apresentação, conteúdo, embalagem, encomendas e atendimento para testar o produto no seu público.</p></div><div className="testimonial-meta"><b>04</b><span>Apresentação e venda</span></div></article></div></div><div className="container testimonial-note">← deslize no celular • conheça os principais pontos do guia →</div></section>\n    <section className="section offer-section"'''
+
+          new_text, count = re.subn(pattern, replacement, text, flags=re.S)
+          if count != 1:
+              raise SystemExit(f'Section replacement failed: found {count} matches')
+          path.write_text(new_text, encoding='utf-8')
+          PY
+
+      - name: Commit and remove workflow
+        run: |
+          rm -f .github/workflows/fix-social-proof.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/routes/index.tsx .github/workflows/fix-social-proof.yml
+          git commit -m 'fix: replace placeholder testimonials with guide highlights'
+          git push
