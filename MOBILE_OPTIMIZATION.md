@@ -1,0 +1,1 @@
+Mobile-first optimization trigger. The mobile polish workflow applies the responsive conversion overrides to src/sales.css.
