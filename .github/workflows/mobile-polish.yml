@@ -1,0 +1,155 @@
+name: Polish mobile landing page
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  mobile-polish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply mobile-first overrides
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/sales.css")
+          text = path.read_text(encoding="utf-8")
+          marker = "/* MOBILE POLISH V2 */"
+
+          if marker in text:
+              print("Mobile polish already applied.")
+              raise SystemExit(0)
+
+          css = r'''
+
+          /* MOBILE POLISH V2 */
+          @media (max-width: 850px){
+            body{overflow-x:hidden}
+            .container{width:min(100% - 24px,620px)}
+            .topbar{min-height:34px;padding:8px 12px;font-size:8px;letter-spacing:.07em}
+            .hero{padding:36px 0 42px}
+            .hero-grid{gap:24px}
+            .hero-copy{text-align:center}
+            .hero .eyebrow{margin-bottom:13px;font-size:9px}
+            .hero h1{font-size:clamp(35px,10vw,45px);line-height:1.01;letter-spacing:-.04em;margin-bottom:17px}
+            .hero-price{font-size:13px;margin-bottom:9px}
+            .hero-sub{font-size:14px;line-height:1.55;margin-bottom:10px}
+            .hero-opportunity{font-size:12px;line-height:1.6;margin-bottom:20px}
+            .hero .cta{min-height:54px;padding:16px 14px;font-size:12px;border-radius:11px;box-shadow:0 12px 30px #ff864535}
+            .microproof{gap:9px 13px;margin-top:12px;font-size:10px;justify-content:center}
+            .hero-product{margin-top:2px}
+            .hero-product img{width:min(330px,88vw);max-height:390px;border-radius:17px}
+            .floating-badge{right:5%;top:2%;padding:9px 12px}
+            .floating-badge span{font-size:17px}
+            .floating-badge b{font-size:9px}
+            .floating-badge small{font-size:8px}
+            .ticker{padding:9px 0;font-size:9px}
+            .ticker-track{min-width:760px;gap:20px}
+            .section{padding:58px 0}
+            .section h2{font-size:32px;line-height:1.06;margin-bottom:15px}
+            .section-copy p,.narrow>p{font-size:14px;line-height:1.7}
+            .comparison{margin-top:30px;gap:9px}
+            .comparison-card{padding:22px;border-radius:17px}
+            .comparison-card h3{font-size:19px}
+            .comparison-card p{font-size:13px}
+            .comparison-arrow{font-size:10px}
+            .two-col{gap:28px}
+            .rounded-image{border-radius:18px}
+            .check-list{gap:12px;margin-top:22px}
+            .check-list li{font-size:13px}
+            .benefits-grid{gap:10px;margin-top:32px}
+            .benefit{padding:20px;border-radius:15px}
+            .benefit-icon{font-size:25px;margin-bottom:12px}
+            .benefit h3{font-size:16px;margin-bottom:6px}
+            .benefit p{font-size:12px;line-height:1.6}
+            .guide-preview{padding-top:34px}
+            .guide-preview-card{padding:14px;border-radius:18px}
+            .guide-preview-page{padding:20px 14px;border-radius:14px}
+            .guide-preview-page h3{font-size:20px;margin:18px 0 9px}
+            .guide-preview-page p{font-size:11px;line-height:1.6;margin-bottom:16px}
+            .guide-preview-grid{gap:8px}
+            .guide-preview-item{padding:11px;border-radius:11px}
+            .guide-preview-item b{font-size:11px}
+            .guide-preview-item span{font-size:9px;line-height:1.5}
+            .image-strip{gap:12px;margin-top:30px}
+            .image-strip>img{min-height:300px;border-radius:18px}
+            .mini-card{min-height:145px;padding:20px;margin-bottom:12px;border-radius:15px}
+            .mini-card span{font-size:11px}
+            .offer-section{padding-top:55px}
+            .offer-card{padding:40px 17px 22px;border-radius:18px}
+            .offer-content{gap:27px;padding-top:10px}
+            .offer-copy h2{font-size:31px;line-height:1.06}
+            .offer-copy>p{font-size:13px;line-height:1.65}
+            .included{gap:9px;margin-top:20px}
+            .included span{font-size:12px}
+            .price-box{padding:23px 15px;border-radius:16px}
+            .price{font-size:62px}
+            .price-box .cta{min-height:52px;font-size:11px}
+            .countdown{margin-top:30px;padding-top:22px}
+            .countdown b{font-size:9px}
+            .countdown>span{font-size:8px}
+            .digits{gap:5px;margin-top:10px}
+            .digits strong{min-width:45px;padding:8px 6px;font-size:18px}
+            .digits small{font-size:6px}
+            .guarantee{padding:50px 0}
+            .guarantee-card{padding:22px;gap:16px;border-radius:17px}
+            .guarantee-card>svg{width:38px;height:38px}
+            .guarantee-card h2{font-size:26px}
+            .guarantee-card p{font-size:12px}
+            .faq-section{padding-top:52px}
+            .faq-list{margin-top:25px}
+            .faq button{padding:18px 2px;font-size:13px}
+            .faq p{font-size:12px;padding:0 24px 18px 2px}
+            .final-cta{padding:70px 0 105px}
+            .final-cta h2{font-size:34px;line-height:1.05}
+            .final-cta p{font-size:13px;line-height:1.65}
+            .mobile-sticky{padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#fffaf7f5}
+            .mobile-sticky .cta{min-height:48px;padding:13px 10px;font-size:11px;border-radius:10px}
+            footer{padding-bottom:82px}
+          }
+
+          @media (max-width: 520px){
+            .container{width:calc(100% - 22px)}
+            .topbar{font-size:7.5px}
+            .hero{padding-top:31px}
+            .hero h1{font-size:36px}
+            .hero-price{font-size:12px}
+            .hero-sub{font-size:13px}
+            .hero-opportunity{font-size:11.5px}
+            .hero-product img{width:min(310px,86vw);max-height:350px}
+            .floating-badge{right:2%;padding:8px 10px}
+            .section{padding:52px 0}
+            .section h2{font-size:30px}
+            .comparison-card{padding:20px}
+            .comparison-card h3{font-size:18px}
+            .guide-preview-page h3{font-size:18px}
+            .offer-card{padding-left:14px;padding-right:14px}
+            .offer-copy h2{font-size:29px}
+            .price{font-size:58px}
+            .digits strong{min-width:42px;font-size:17px}
+            .final-cta h2{font-size:32px}
+          }
+          '''
+
+          path.write_text(text.rstrip() + css + "\n", encoding="utf-8")
+          PY
+
+      - name: Commit mobile polish
+        run: |
+          if git diff --quiet; then
+            echo "No mobile changes needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/sales.css
+          git commit -m "perf: improve mobile conversion layout"
+          git push
