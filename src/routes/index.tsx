@@ -136,7 +136,7 @@ function SalesPage() {
     ["Existe garantia?", "Sim. Você tem 7 dias de garantia para conhecer o material. Dentro desse prazo, pode solicitar o reembolso conforme as condições da oferta."],
   ];
 
-  const testimonials = [
+  const testimonials: Array<[string, string, string]> = [
     ["“O guia me ajudou a enxergar o produto além da receita. A parte de organização e precificação fez muita diferença para eu entender como testar.”", "Maria", "Primeiro contato com o produto"],
     ["“Gostei da forma prática de organizar o preparo. Ficou muito mais fácil visualizar o que preciso separar antes de começar a produzir.”", "Juliana", "Começando agora"],
     ["“A parte de apresentação e conteúdo chamou minha atenção. É exatamente o tipo de detalhe que eu não pensava quando fazia apenas a receita.”", "Camila", "Testando novas vendas"],
