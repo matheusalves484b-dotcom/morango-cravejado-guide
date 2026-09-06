@@ -2,9 +2,9 @@ import "@/sales.css";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Check, ChevronDown, Gift, ShieldCheck, Sparkles, Star, ArrowRight } from "lucide-react";
-import coverImage from "@/assets/morango-cravejado-cover.jpg";
-import detailImage from "@/assets/morango-cravejado-detail.jpg";
-import packagingImage from "@/assets/morango-cravejado-packaging.jpg";
+import coverImage from "@/assets/morango-cravejado-cover.webp";
+import detailImage from "@/assets/morango-cravejado-detail.webp";
+import packagingImage from "@/assets/morango-cravejado-packaging.webp";
 
 const CHECKOUT_URL = "https://pay.lowify.com.br/checkout?product_id=PErwVu";
 const META_PIXEL_ID = "1764846594706015";
