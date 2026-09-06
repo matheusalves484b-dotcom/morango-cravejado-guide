@@ -140,7 +140,7 @@
   .testimonials-section .narrow>p{font-size:12px;line-height:1.65}
   .testimonial-viewport{margin-top:32px;padding:6px 0 14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .testimonial-viewport::-webkit-scrollbar{display:none}
-  .testimonial-track{gap:12px;padding:0 12px;animation:none;width:max-content}
+   .testimonial-track{gap:12px;padding:0 12px;animation:testimonialMarquee 38s linear infinite;width:max-content}
   .testimonial-card{width:min(82vw,330px);min-height:245px;flex-basis:min(82vw,330px);border-radius:18px;padding:22px;scroll-snap-align:start;box-shadow:0 12px 28px #6e26300e}
   .testimonial-card p{font-size:14px;line-height:1.65}
   .testimonial-stars{font-size:11px;margin-bottom:13px}
